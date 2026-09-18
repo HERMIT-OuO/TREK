@@ -6,11 +6,11 @@
 
 | 目录 | Markdown 数量 | 入口 |
 | --- | --- | --- |
-| guides | 5 | [跨包指南](../../spec/guides/index.md) |
-| client/frontend | 9 | [客户端](../../spec/client/frontend/index.md) |
-| server/backend | 9 | [服务端](../../spec/server/backend/index.md) |
-| shared/library | 4 | [共享契约](../../spec/shared/library/index.md) |
-| plugin-sdk/sdk | 4 | [插件 SDK](../../spec/plugin-sdk/sdk/index.md) |
+| guides | 5 | [跨包指南](../../../../spec/guides/index.md) |
+| client/frontend | 9 | [客户端](../../../../spec/client/frontend/index.md) |
+| server/backend | 9 | [服务端](../../../../spec/server/backend/index.md) |
+| shared/library | 4 | [共享契约](../../../../spec/shared/library/index.md) |
+| plugin-sdk/sdk | 4 | [插件 SDK](../../../../spec/plugin-sdk/sdk/index.md) |
 
 合计 31 份规范。原 36 份模板中保留并重写 16 份、删除不适用层的 20 份，新增 15 份主题/索引。删除前完整阅读与基线逐字节比对，未发现需保留的用户正文。
 
@@ -48,6 +48,8 @@
 
 ## 提交与任务状态
 
-未 commit、push、archive 或运行 finish/add_session。已读取收尾流程，但其自动归档/提交步骤超出本任务授权，因此不执行。
+初次交付按授权未自动提交或归档。用户随后明确要求提交并同步上游，已产生工作提交 `d71a6930` 与上游合并提交 `e53a69c7`；上游仅修改两份 MCP Wiki，原有规范保持不变。
 
-交付已通过文档质量门禁；任务记录保留 in_progress，表示仍未提交/归档，不代表规范尚未完成。原始规范和配置备份保留在本任务 `.baseline/`，后续仅在用户明确要求时处理提交或归档，不将备份作为正式规范入口。
+用户现已明确要求结束任务：通过 task.py 将任务标为 completed 并移入 archive，清除当前会话任务指针，迁移 JSONL 与文档导航以避免断链。此任务没有 PR/base branch，归档使用工具提供的 `--skip-branch-validation`，没有虚构目标分支或改动运行时脚本。
+
+原始规范和配置备份随任务保留在 `.baseline/`，受 Git 忽略规则保护，不提交到仓库。收尾只提交本任务归档与开发日志，使用中文提交信息，不 push；本节的后续授权取代初次交付时暂缓提交/归档的状态说明。

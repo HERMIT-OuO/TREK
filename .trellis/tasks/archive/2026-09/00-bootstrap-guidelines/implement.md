@@ -79,4 +79,4 @@ git status --short
 - [x] 最终目录、引用校验、包发现、JSONL 和范围检查结果已记录在 verification.md 与 research/final-review.md。
 - [x] PRD 的 AC1–AC6 均通过文档任务验收，无范围内阻塞问题。
 - [x] 交付说明已整理，明确未运行产品验证和既有诊断限制。
-- [x] 未 commit、push、archive 或运行自动提交的收尾脚本；保留任务 in_progress，等待用户另行决定提交/归档。
+- [x] 初次交付未自动提交/归档；后续按用户明确授权完成工作提交及任务归档，状态为 completed；未 push，详见 verification.md 收尾记录。

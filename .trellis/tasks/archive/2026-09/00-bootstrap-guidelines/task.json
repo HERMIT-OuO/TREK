@@ -3,7 +3,7 @@
   "name": "00-bootstrap-guidelines",
   "title": "初始化 TREK 项目开发规范",
   "description": "依据当前源码与测试重建按包分层的中文开发规范，并校验索引、引用及上下文发现",
-  "status": "in_progress",
+  "status": "completed",
   "dev_type": "docs",
   "scope": null,
   "package": null,
@@ -11,11 +11,11 @@
   "creator": "hremit",
   "assignee": "hremit",
   "createdAt": "2026-09-13",
-  "completedAt": null,
+  "completedAt": "2026-09-18",
   "branch": "main",
   "base_branch": null,
   "worktree_path": null,
-  "commit": null,
+  "commit": "d71a6930",
   "pr_url": null,
   "subtasks": [],
   "children": [],
@@ -28,10 +28,10 @@
     ".trellis/spec/plugin-sdk/",
     ".trellis/config.yaml"
   ],
-  "notes": "用户已批准最终规划并回复可以开始；task.py start 已激活任务。规范和配置基线保存在本任务 .baseline，实施限规范与 Trellis 包映射，不改业务代码、不自动提交或归档。",
+  "notes": "规范通过文档质量门禁。用户后续明确授权提交并结束任务，工作提交为 d71a6930；task.py 已将任务标为 completed 并归档，当前任务指针已清除。本地 .baseline 继续保留但不提交；未推送到远程。",
   "meta": {
     "planning_approved": "true",
     "quality_gate": "passed",
-    "delivery_status": "verified-awaiting-user-commit"
+    "delivery_status": "completed"
   }
 }
