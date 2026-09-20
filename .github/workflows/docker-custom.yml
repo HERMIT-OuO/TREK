@@ -25,8 +25,17 @@ jobs:
         run: |
           # GHCR 镜像名称必须小写；使用完整提交 SHA 标记版本。
           IMAGE="ghcr.io/${GITHUB_REPOSITORY,,}"
-          echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
-          echo "tag=sha-${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+          TAG="sha-${GITHUB_SHA}"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          {
+            echo "tags<<EOF"
+            echo "${IMAGE}:${TAG}"
+            # 仅 main 分支更新 latest，避免其他分支覆盖日常部署版本。
+            if [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
+              echo "${IMAGE}:latest"
+            fi
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: 启用 ARM64 模拟构建
         uses: docker/setup-qemu-action@v3
@@ -50,7 +59,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.tag }}
+          tags: ${{ steps.meta.outputs.tags }}
           build-args: |
             APP_VERSION=${{ steps.meta.outputs.tag }}
           cache-from: type=gha,scope=docker-custom
@@ -58,9 +67,10 @@ jobs:
 
       - name: 输出镜像地址
         env:
-          IMAGE: ${{ steps.meta.outputs.image }}
-          TAG: ${{ steps.meta.outputs.tag }}
+          TAGS: ${{ steps.meta.outputs.tags }}
         run: |
           echo "### 本次发布镜像" >> "$GITHUB_STEP_SUMMARY"
-          echo "\`${IMAGE}:${TAG}\`" >> "$GITHUB_STEP_SUMMARY"
+          while IFS= read -r IMAGE_TAG; do
+            echo "\`${IMAGE_TAG}\`" >> "$GITHUB_STEP_SUMMARY"
+          done <<< "$TAGS"
           echo "支持架构：linux/amd64、linux/arm64。" >> "$GITHUB_STEP_SUMMARY"
